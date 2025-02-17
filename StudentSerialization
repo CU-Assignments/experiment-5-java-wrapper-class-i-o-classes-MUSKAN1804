@@ -1,0 +1,35 @@
+import java.io.*;
+
+class Student implements Serializable {
+    int id;
+    String name;
+    double gpa;
+}
+
+public class StudentSerialization {
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.id = 101;
+        student.name = "John Doe";
+        student.gpa = 8.5;
+
+        // Serialization
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("student.txt"))) {
+            out.writeObject(student);
+            System.out.println("Student data saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error during serialization: " + e.getMessage());
+        }
+
+        // Deserialization
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("student.txt"))) {
+            Student loadedStudent = (Student) in.readObject();
+            System.out.println("Student Details:");
+            System.out.println("ID: " + loadedStudent.id);
+            System.out.println("Name: " + loadedStudent.name);
+            System.out.println("GPA: " + loadedStudent.gpa);
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error during deserialization: " + e.getMessage());
+        }
+    }
+}
