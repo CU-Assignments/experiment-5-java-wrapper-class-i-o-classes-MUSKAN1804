@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class SumOfIntegers {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter numbers separated by spaces: ");
+        String numbers = input.nextLine();
+
+        String[] numArray = numbers.split(" ");
+        int sum = 0;
+
+        for (String num : numArray) {
+            Integer intValue = Integer.parseInt(num); // Parsing String to Integer (Wrapper Class)
+            sum += intValue; // Auto-unboxing
+        }
+
+        System.out.println("Sum of integers: " + sum);
+    }
+}
